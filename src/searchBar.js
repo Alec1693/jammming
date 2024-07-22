@@ -7,7 +7,7 @@ export default function SearchBar(){
         console.log(searchText)
     }
 
-
+    //call the search results component here to display the results form the onClick search results?
     return (
         <div>
             <input id="searchInput" type="text" name="searchBox" placeholder="Type an Artist, Song, or Album"/>

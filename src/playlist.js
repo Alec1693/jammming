@@ -6,6 +6,7 @@ export default function Playlist(){
     return(
         <div>
             <input placeholder="Name your playlist"/>
+            <button>Save to Spotify</button>
         </div>
     )
 }
