@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 export default function SearchResults(props){
     //surely I will use useState to keep track of the tracks added from search results? Can I store it in the same loop as assigning divs?
     return (
+        //need to add a clickhandler which updates state with newly added song
         <div>
             <h2>Results</h2>
             {props.songs.map(song => {
