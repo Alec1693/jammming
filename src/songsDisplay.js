@@ -4,12 +4,19 @@ import Playlist from './playlist';
 
 
 export default function SongDisplay(props){
-    const [songList, setSongList] = useState(props.data);
+    const [playlist, setPlaylist] = useState([]);
+    function addToPlaylist(song){
+
+        setPlaylist(prevPlaylist => [...prevPlaylist, song]);
+    }
+    function addPlaylistToProfile(playlist){
+        //send playlist off to api
+    }
     return (
         //pass the props to both components and let the components determine whether to render or not based on key in song object
         <div>
-            <SearchResults songs={songList} addToPlaylist={(songList) => setSongList({songList})}/>
-            <Playlist songs={songList}/>
+            <SearchResults addToPlaylist={addToPlaylist}/>
+            <Playlist playlist={playlist}/>
         </div>
     )
 }
