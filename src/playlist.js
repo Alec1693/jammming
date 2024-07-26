@@ -3,8 +3,6 @@ import React from 'react';
 //pass the track added from the search results to the playlist
 //playlist needs input field to name playlist, thne display selected songs beneath
 export default function Playlist(props){
-    let playlistName = document.getElementById('playlistName').value;
-
     function handleClick(){
         //handle submission of playlist and playlistName to spotify api
         
