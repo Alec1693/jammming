@@ -5,7 +5,7 @@ import React from 'react';
 export default function Playlist(props){
     return(
         <div>
-            <input id="playlistName" placeholder="Name your playlist"/>
+            <input type="text" id="playlistName" placeholder="Name your playlist"/>
             {props.playlist.map(song => {
                 return (
                     <div key={song.id}>
