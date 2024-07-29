@@ -9,14 +9,14 @@ export default function SongDisplay(props){
 
         setPlaylist(prevPlaylist => [...prevPlaylist, song]);
     }
-    function addPlaylistToProfile(playlist){
-        //send playlist off to api
+    function removeSongFromPlaylist(song){
+        setPlaylist(playlist.filter(fSong => fSong.id !== song.id))
     }
     return (
         //pass the props to both components and let the components determine whether to render or not based on key in song object
         <div>
             <SearchResults addToPlaylist={addToPlaylist}/>
-            <Playlist playlist={playlist}/>
+            <Playlist playlist={playlist} removeSongFromPlaylist={removeSongFromPlaylist}/>
         </div>
     )
 }

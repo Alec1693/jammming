@@ -12,17 +12,14 @@ export default function SearchResults(props){
         <div>
             <h2>Results</h2>
             {songData.map(song => {
-                if(!song.isAdded){
-                    return (
-                        <div id={song.id} key={song.id}>
-                            <p>{song.trackName}</p>
-                            <p>{song.artistName}</p>
-                            <p>{song.albumName}</p>
-                            <button onClick={() => props.addToPlaylist(song)} className="addButton">+</button>
-                        </div>
-                    )
-                }
-                return 
+                return (
+                    <div id={song.id} key={song.id}>
+                        <p>{song.trackName}</p>
+                        <p>{song.artistName}</p>
+                        <p>{song.albumName}</p>
+                        <button onClick={() => props.addToPlaylist(song)} className="addButton">+</button>
+                    </div>
+                )
             })}
         </div>
     )
