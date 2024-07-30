@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 function App() {
   const [search, setSearch] = useState([]);
   function sendSearch(results){
-    setSearch(results);
+    setSearch(prevSearch => [...prevSearch, results]);
   }
   return (
     <div className="App">

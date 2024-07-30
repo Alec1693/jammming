@@ -4,7 +4,12 @@ import Playlist from '../playlist/playlist';
 
 
 export default function SongDisplay(props){
+    const [listName, setListName] = useState('');
     const [playlist, setPlaylist] = useState([]);
+    function addListName(name){
+        setListName(name);
+        console.log(name);
+    }
     function addToPlaylist(song){
 
         setPlaylist(prevPlaylist => [...prevPlaylist, song]);
@@ -16,7 +21,9 @@ export default function SongDisplay(props){
         //pass the props to both components and let the components determine whether to render or not based on key in song object
         <div>
             <SearchResults addToPlaylist={addToPlaylist}/>
-            <Playlist playlist={playlist} removeSongFromPlaylist={removeSongFromPlaylist}/>
+            <Playlist addListName={addListName} playlist={playlist} removeSongFromPlaylist={removeSongFromPlaylist}/>
+            <h2>testing</h2>
+            <p>name:{listName}</p>
         </div>
     )
 }
