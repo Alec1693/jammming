@@ -1,16 +1,19 @@
 import './App.css';
-import Playlist from './playlist';
-import SearchBar from './searchBar';
-import SearchResults from './searchResults';
+import SearchBar from './searchBar/searchBar';
 import songData from './songTestData';
-import SongDisplay from './songsDisplay';
+import SongDisplay from './songsDisplay/songsDisplay';
+import React, { useState } from 'react';
 
 function App() {
+  const [search, setSearch] = useState([]);
+  function sendSearch(results){
+    setSearch(results);
+  }
   return (
     <div className="App">
       <h1>Jammming</h1>
-      <SearchBar />
-      <SongDisplay data={songData}/>
+      <SearchBar sendSearch={sendSearch}/>
+      <SongDisplay search={search} data={songData}/>
     </div>
   );
 }

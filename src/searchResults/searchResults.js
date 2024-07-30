@@ -1,5 +1,5 @@
 import React from 'react';
-import songData from './songTestData';
+import songData from '../songTestData';
 
 //section to display results of search
 //map through array of song objects and display them in this section

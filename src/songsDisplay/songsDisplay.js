@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SearchResults from './searchResults';
-import Playlist from './playlist';
+import SearchResults from '../searchResults/searchResults';
+import Playlist from '../playlist/playlist';
 
 
 export default function SongDisplay(props){
