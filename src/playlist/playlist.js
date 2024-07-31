@@ -16,7 +16,7 @@ export default function Playlist(props){
                     </div>
                 )
             })}
-            <button onClick={() => props.addListName(document.getElementById("playlistName").innerHTML)}>Save to Spotify</button>
+            <button >Save to Spotify</button>
         </div>
     )
 }
