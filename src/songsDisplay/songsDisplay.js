@@ -14,6 +14,9 @@ export default function SongDisplay(props){
     function removeSongFromPlaylist(song){
         setPlaylist(playlist.filter(fSong => fSong.id !== song.id))
     }
+    function sendPlaylistName(name){
+        setListName(name);
+    }
     return (
         //pass the props to both components and let the components determine whether to render or not based on key in song object
         <div>
