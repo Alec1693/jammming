@@ -1,4 +1,5 @@
 import SearchBar from "./searchbar";
+import Results from "./Results";
 import React, { useState } from "react";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   return (
     <div>
       <SearchBar storeSearch={storeSearchResults}/>
+      <Results searchResults={searchResults} />
     </div>
   );
 }
