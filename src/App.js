@@ -5,11 +5,26 @@ import React, { useState } from "react";
 function App() {
   //state stores results from search via spotify api
   const [searchResults, setSearchResults] = useState([]);
+  //state to store the playlist user is adding to
+  const [playlist, setPlaylist] = useState([]);
   //callback function to retrieve the search results from SearchBar
   const storeSearchResults = (results) => {
     setSearchResults(results);
   }
-
+  //callback function to add an item to playlist state for playlist component
+  const addTrackToPlaylist = (track) => {
+    //need a condition to check if songId exists in playlist state
+    playlist.map(t => {
+      if(track[3] === t[3]){
+        console.log("Track already exists");
+        return
+      } else {
+        setPlaylist(prev => [...prev, t]);
+        console.log("Track added")
+      }
+    });
+  }
+  //test function Im using to print some data to console
   const test = (t) => {
     console.log(t)
   }
@@ -19,7 +34,7 @@ function App() {
   return (
     <div>
       <SearchBar storeSearch={storeSearchResults}/>
-      <Results searchResults={searchResults} />
+      <Results addTrack={addTrackToPlaylist} searchResults={searchResults} />
     </div>
   );
 }
