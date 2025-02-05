@@ -14,15 +14,8 @@ function App() {
   //callback function to add an item to playlist state for playlist component
   const addTrackToPlaylist = (track) => {
     //need a condition to check if songId exists in playlist state
-    playlist.map(t => {
-      if(track[3] === t[3]){
-        console.log("Track already exists");
-        return
-      } else {
-        setPlaylist(prev => [...prev, t]);
-        console.log("Track added")
-      }
-    });
+    setPlaylist(prev => [...prev, track]);
+    console.log("Track added")
   }
   //test function Im using to print some data to console
   const test = (t) => {

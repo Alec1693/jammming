@@ -8,7 +8,7 @@ function Results(props){
     }
     return (
         <div>
-            {props.searchResults ? (
+            {props.searchResults.length > 0 ? (
                 props.searchResults.map(track => {
                     return (
                         <div id={track[3]} key={track[3]}>
