@@ -1,6 +1,7 @@
 import SearchBar from "./searchbar";
 import Results from "./Results";
 import React, { useState } from "react";
+import Spotify from "./utils/Spotify";
 
 function App() {
   //state stores results from search via spotify api
@@ -10,6 +11,14 @@ function App() {
   //callback function to retrieve the search results from SearchBar
   const storeSearchResults = (results) => {
     setSearchResults(results);
+  }
+  //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
+  async function spotifySearch(searchValue){
+    //setSearchResults(Spotify.search(searchValue));
+    const token = await Spotify.fetchAccessToken();
+    console.log(token)
+    const apiSearchResults = await Spotify.search(token, searchValue);
+    console.log(apiSearchResults)
   }
   //callback function to add an item to playlist state for playlist component
   const addTrackToPlaylist = (track) => {
@@ -26,7 +35,7 @@ function App() {
 
   return (
     <div>
-      <SearchBar storeSearch={storeSearchResults}/>
+      <SearchBar sendSearch={spotifySearch} />
       <Results addTrack={addTrackToPlaylist} searchResults={searchResults} />
     </div>
   );
