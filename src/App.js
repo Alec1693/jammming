@@ -2,6 +2,7 @@ import SearchBar from "./searchbar";
 import Results from "./Results";
 import React, { useState } from "react";
 import Spotify from "./utils/Spotify";
+import Playlist from "./Playlist";
 
 function App() {
   //state stores results from search via spotify api
@@ -16,19 +17,24 @@ function App() {
   async function spotifySearch(searchValue){
     //setSearchResults(Spotify.search(searchValue));
     const token = await Spotify.fetchAccessToken();
-    console.log(token)
     const apiSearchResults = await Spotify.search(token, searchValue);
-    console.log(apiSearchResults)
+    setSearchResults(apiSearchResults)
   }
   //callback function to add an item to playlist state for playlist component
   const addTrackToPlaylist = (track) => {
     //need a condition to check if songId exists in playlist state
+    if(playlist.some(item => item.id === track.id)) return;
     setPlaylist(prev => [...prev, track]);
     console.log("Track added")
   }
+  //callback function to give to Playlist to remove unwanted tracks
+  const removeTrackFromPlaylist = (track) => {
+    const filteredPlaylist = playlist.filter(item => item.id !== track.id);
+    setPlaylist(filteredPlaylist);
+  }
   //test function Im using to print some data to console
   const test = (t) => {
-    console.log(t)
+    console.log(playlist)
   }
   //3 react components needed for app: Searchbar, Results, Playlist
   //1 Module to process API requests: Spotify
@@ -37,6 +43,8 @@ function App() {
     <div>
       <SearchBar sendSearch={spotifySearch} />
       <Results addTrack={addTrackToPlaylist} searchResults={searchResults} />
+      <Playlist playlist={playlist} removeTrack={removeTrackFromPlaylist}/>
+      <button onClick={test}>Click</button>
     </div>
   );
 }

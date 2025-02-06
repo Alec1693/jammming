@@ -8,13 +8,14 @@ function Results(props){
     }
     return (
         <div>
-            {props.searchResults > 0 ? (
+            {props.searchResults.length > 0 ? (
                 props.searchResults.map(track => {
                     return (
-                        <div id={track[3]} key={track[3]}>
-                            <p>{track[0]}</p>
-                            <p>{track[1]}</p>
-                            <p>{track[2]}</p>
+                        <div id={track.id} key={track.id}>
+                            <p>{track.name}</p>
+                            <p>{track.album}</p>
+                            <p>{track.artist}</p>
+                            <img src={track.albumCover} alt="Album Cover"></img>
                             <button onClick={() => handleClick(track)}>+</button>
                         </div>
                     )
