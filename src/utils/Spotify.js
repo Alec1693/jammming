@@ -39,7 +39,23 @@ const Spotify = {
         console.error("Error retrieving tracks", error)
         return null
       }
-}
+    },
+    getAuthorizationLink(){
+      const redirectUri = 'http://localhost:3000';
+      const scope = 'playlist-modify-public playlist-modify-private';
+      const authUrl = "https://accounts.spotify.com/authorize";
+      const url = `${authUrl}?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
+      return url;
+    },
+    getCodeFromUrl(){
+      const match = window.location.search.match(/[?&]code=([^&]+)/);
+      return match ? match[1] : null;
+    },
+    removeCodeFromUrl(){
+      const url = new URL(window.location.href);
+      url.searchParams.delete("code");
+      window.history.replaceState({}, document.title, url.pathname + url.search);
+    }
 }
 
 export default Spotify;
