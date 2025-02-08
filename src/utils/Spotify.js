@@ -55,6 +55,25 @@ const Spotify = {
       const url = new URL(window.location.href);
       url.searchParams.delete("code");
       window.history.replaceState({}, document.title, url.pathname + url.search);
+    },
+    async createSpotifyPlaylist(code, playlistName){
+      try{
+        const response = await fetch(`https://api.spotify.com/v1/users/${clientId}/playlists`, {
+          headers: {
+            Authorization: `Bearer ${code}`,
+            "Content-Type": 'application/json'
+          },
+          body: {
+            name: playlistName,
+            public: false
+          }
+        })
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Error creating playlist", error)
+        return null
+      }
     }
 }
 

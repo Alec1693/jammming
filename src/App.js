@@ -42,10 +42,11 @@ function App() {
     setPlaylist(filteredPlaylist);
   }
   //callback to set the name of the playlist
-  const updatePlaylistName = (name) => {
+  async function updatePlaylistName(name){
     //once this is called we will be creating the playlist and sending the playlist tracks to the api
-    console.log("Playlist name: " + name);
-    console.log(playlist);
+    const apiResponse = await Spotify.createSpotifyPlaylist();
+    console.log("Playlist created");
+    console.log(apiResponse);
   }
   //test function Im using to print some data to console
   const test = (t) => {
