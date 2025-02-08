@@ -9,19 +9,19 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   //state to store the playlist user is adding to
   const [playlist, setPlaylist] = useState([]);
+  //store the spotify authorization code to send playlist to api
+  const [authCode, setAuthCode] = useState("");
   //create a useEffect that runs only when the app component mounts. I want to use oauth2 to authorize access to users account with permission to create a new playlist
   //useEffect will also retrieve an access_token returned via url and store it in a variable to be used when sending api request to create a playlist and add songs to playlist
   //callback function to retrieve the search results from SearchBar
   useEffect(() => {
     const authUrl = Spotify.getAuthorizationLink();
-    window.location.href = authUrl;
     const code = Spotify.getCodeFromUrl();
-    const newUrl = window.location.origin + window.location.pathname;
-    window.history.replaceState({}, document.title, newUrl);
+    if(!code){
+      window.location.href = authUrl;
+    }
+    setAuthCode(code);
   }, [])
-  const storeSearchResults = (results) => {
-    setSearchResults(results);
-  }
   //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
   async function spotifySearch(searchValue){
     //setSearchResults(Spotify.search(searchValue));
@@ -41,9 +41,15 @@ function App() {
     const filteredPlaylist = playlist.filter(item => item.id !== track.id);
     setPlaylist(filteredPlaylist);
   }
+  //callback to set the name of the playlist
+  const updatePlaylistName = (name) => {
+    //once this is called we will be creating the playlist and sending the playlist tracks to the api
+    console.log("Playlist name: " + name);
+    console.log(playlist);
+  }
   //test function Im using to print some data to console
   const test = (t) => {
-    console.log(playlist)
+    console.log(authCode)
   }
   //3 react components needed for app: Searchbar, Results, Playlist
   //1 Module to process API requests: Spotify
@@ -52,7 +58,7 @@ function App() {
     <div>
       <SearchBar sendSearch={spotifySearch} />
       <Results addTrack={addTrackToPlaylist} searchResults={searchResults} />
-      <Playlist playlist={playlist} removeTrack={removeTrackFromPlaylist}/>
+      <Playlist playlist={playlist} removeTrack={removeTrackFromPlaylist} updatePlaylistName={updatePlaylistName} />
       <button onClick={test}>Click</button>
     </div>
   );

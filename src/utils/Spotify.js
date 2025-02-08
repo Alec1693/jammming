@@ -44,7 +44,7 @@ const Spotify = {
       const redirectUri = 'http://localhost:3000';
       const scope = 'playlist-modify-public playlist-modify-private';
       const authUrl = "https://accounts.spotify.com/authorize";
-      const url = `${authUrl}?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
+      const url = `${authUrl}?client_id=${clientId}&response_type=code&redirect_uri=` + encodeURIComponent(redirectUri) + `&scope=` + encodeURIComponent(scope);
       return url;
     },
     getCodeFromUrl(){
