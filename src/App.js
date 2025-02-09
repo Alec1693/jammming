@@ -10,17 +10,17 @@ function App() {
   //state to store the playlist user is adding to
   const [playlist, setPlaylist] = useState([]);
   //store the spotify authorization code to send playlist to api
-  const [authCode, setAuthCode] = useState("");
+  const [playlistToken, setPlaylistToken] = useState(null);
   //create a useEffect that runs only when the app component mounts. I want to use oauth2 to authorize access to users account with permission to create a new playlist
   //useEffect will also retrieve an access_token returned via url and store it in a variable to be used when sending api request to create a playlist and add songs to playlist
   //callback function to retrieve the search results from SearchBar
   useEffect(() => {
-    const authUrl = Spotify.getAuthorizationLink();
-    const code = Spotify.getCodeFromUrl();
-    if(!code){
-      window.location.href = authUrl;
+    let i = 0;
+    if(i < 1){
+      const tempToken = Spotify.codeChallengeGenerator();
+      setPlaylistToken(tempToken);
+      i++;
     }
-    setAuthCode(code);
   }, [])
   //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
   async function spotifySearch(searchValue){
@@ -50,7 +50,7 @@ function App() {
   }
   //test function Im using to print some data to console
   const test = (t) => {
-    console.log(authCode)
+    //
   }
   //3 react components needed for app: Searchbar, Results, Playlist
   //1 Module to process API requests: Spotify
