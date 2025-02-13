@@ -1,4 +1,4 @@
-const accessToken = '';
+
 
 const Spotify = {
   userParameters: {
@@ -9,46 +9,43 @@ const Spotify = {
     scope: 'playlist-modify-public',
     authUrl: "https://accounts.spotify.com/authorize"
   },
-  generateRandomString(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  },
+  accessToken: null,
   fetchAccessToken(){
-      if(accessToken){
-        return accessToken
+    //if the accessToken is assigned the value of an accessTOken then return it
+      if(Spotify.accessToken){
+        return Spotify.accessToken
       }
-
-      const accessTokenMatch = window.location.href.match(/access_token=([\w-]+)/);
-      const expiresInMatch = window.location.href.match(/expires_in=(\d+)/);
-      let state = this.generateRandomString(16)
-
+      //build the url with the user's data to be sent to spotify
       let url = 'https://accounts.spotify.com/authorize';
       url += '?response_type=token';
-      url += '&client_id=' + encodeURIComponent(this.userParameters.clientId);
-      url += '&scope=' + encodeURIComponent(this.userParameters.scope);
-      url += '&redirect_uri=' + encodeURIComponent(this.userParameters.redirectUri);
-      url += '&state=' + encodeURIComponent(state);
-
+      url += '&client_id=' + encodeURIComponent(Spotify.userParameters.clientId);
+      url += '&scope=' + encodeURIComponent(Spotify.userParameters.scope);
+      url += '&redirect_uri=' + encodeURIComponent(Spotify.userParameters.redirectUri);
+      //search the url with regex to find the access token and expires in parameters and assign each to a variable
+      const accessTokenMatch = window.location.href.match(/access_token=([\w-]+)/);
+      const expiresInMatch = window.location.href.match(/expires_in=(\d+)/);
+      //check if the previous regex statements have assigned values to the variables below
       if(accessTokenMatch && expiresInMatch){
+        //the access token exists in the 2nd list item of the match variable, assign it to the variable accessToken to be returned
+        Spotify.accessToken = accessTokenMatch[1];
+        //we want to set a timeout to occur when the access_token expires. the [1] expires in value has the duration stored in ms. we want to change it to seconds by multiplying by 1000
+        window.setTimeout(() => Spotify.accessToken = null, expiresInMatch[1] * 1000);
+        // Clear the URL fragment for security reasons
+        window.history.pushState({}, null, window.location.pathname);
+        //now we need to return the accessToken so it can be used. 
+        return Spotify.accessToken;
+      } else{
+        //change the url so we can authenticate with spotify
         window.location.href = url;
-      }else{
-
       }
     },
-    async search(accessToken, term){
-      try{
-        const response = await fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+    search(accessToken, term){
+      const response = fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
-        })
-        const data = await response.json();
-        return data.tracks.items.map(track => ({
+        }).then(response => response.json())
+        return response.tracks.items.map(track => ({
               id: track.id,
               name: track.name,
               artist: track.artists[0].name,
@@ -56,10 +53,6 @@ const Spotify = {
               uri: track.uri,
               albumCover: track.album.images[2].url
         }))
-      } catch (error) {
-        console.error("Error retrieving tracks", error)
-        return null
-      }
     }
 }
 

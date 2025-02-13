@@ -10,23 +10,18 @@ function App() {
   //state to store the playlist user is adding to
   const [playlist, setPlaylist] = useState([]);
   //store the spotify authorization code to send playlist to api
-  const [playlistToken, setPlaylistToken] = useState(null);
+  const [accessToken, setAccessToken] = useState('');
   //create a useEffect that runs only when the app component mounts. I want to use oauth2 to authorize access to users account with permission to create a new playlist
   //useEffect will also retrieve an access_token returned via url and store it in a variable to be used when sending api request to create a playlist and add songs to playlist
   //callback function to retrieve the search results from SearchBar
   useEffect(() => {
-    let i = 0;
-    if(i < 1){
-      const tempToken = Spotify.codeChallengeGenerator();
-      setPlaylistToken(tempToken);
-      i++;
-    }
-  }, [])
+    //check if the accessToken state has been assigned the token from spotify api. if not then run the Spotify function fetchAccessToken and assign it to the accessToken state
+    let token = Spotify.fetchAccessToken();
+    setAccessToken(token);
+  },)
   //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
-  async function spotifySearch(searchValue){
-    //setSearchResults(Spotify.search(searchValue));
-    const token = await Spotify.fetchAccessToken();
-    const apiSearchResults = await Spotify.search(token, searchValue);
+  const spotifySearch = (searchValue) => {
+    const apiSearchResults = Spotify.search(accessToken, searchValue);
     setSearchResults(apiSearchResults)
   }
   //callback function to add an item to playlist state for playlist component
@@ -50,7 +45,7 @@ function App() {
   }
   //test function Im using to print some data to console
   const test = (t) => {
-    //
+    console.log(accessToken)
   }
   //3 react components needed for app: Searchbar, Results, Playlist
   //1 Module to process API requests: Spotify
