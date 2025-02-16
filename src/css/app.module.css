@@ -1,0 +1,23 @@
+.app{
+    display: flex;
+    flex-direction: column;
+}
+h2 {
+    width: 100%;  /* Makes the element span the full width */
+    display: block; /* Ensures it behaves like a block element */
+    text-align: center; /* Optional: Centers the text */
+    background-color: #1d1160; /* Optional: Adds a background */
+    padding: 10px; /* Optional: Adds some spacing */
+    color: white;
+    top: 0;
+  }
+  span {
+    color: #800080;
+  }
+  body{
+    background-image: url("https://i.pinimg.com/originals/49/1b/8b/491b8bbbbdfb7518d96fd83aaf8789a4.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  

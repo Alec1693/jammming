@@ -1,14 +1,12 @@
 import React from "react";
 
-function Results(props){
-    //need a function to call for onClick with track button so it can be added to a "playlist" state. 
-    //for now I'll hard code a track to see if it lets me add, then i'll hard code a duplicate to make sure duplicates can't be added
+function Track(props){
     const handleClick = (track) => {
         props.addTrack(track);
     }
-    return (
+    return(
         <div>
-            {props.searchResults.length > 0 ? (
+            {
                 props.searchResults.map(track => {
                     return (
                         <div id={track.id} key={track.id}>
@@ -20,11 +18,9 @@ function Results(props){
                         </div>
                     )
                 })
-            ) : (
-                <p>Waiting on search results</p>
-            )}
+            }
         </div>
     )
 }
 
-export default Results;
+export default Track;

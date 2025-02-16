@@ -1,8 +1,9 @@
 import SearchBar from "./searchbar";
-import Results from "./Results";
+import TrackList from "./TrackList"
 import React, { useState, useEffect } from "react";
 import Spotify from "./utils/Spotify";
 import Playlist from "./Playlist";
+import "./css/app.module.css"
 
 function App() {
   //state stores results from search via spotify api
@@ -51,8 +52,9 @@ function App() {
 
   return (
     <div>
+      <h2>Ja<span>mmm</span>ing</h2>
       <SearchBar sendSearch={spotifySearch} />
-      <Results addTrack={addTrackToPlaylist} searchResults={searchResults} />
+      <TrackList addTrack={addTrackToPlaylist} searchResults={searchResults} />
       <Playlist playlist={playlist} removeTrack={removeTrackFromPlaylist} updatePlaylistName={updatePlaylistName} />
       <button onClick={test}>Click</button>
     </div>
