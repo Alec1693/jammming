@@ -1,0 +1,60 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h2 {
+    width: 100%;  /* Makes the element span the full width */
+    display: block; /* Ensures it behaves like a block element */
+    text-align: center; /* Optional: Centers the text */
+    background-color: #1d1160; /* Optional: Adds a background */
+    padding: 10px; /* Optional: Adds some spacing */
+    color: white;
+    top: 0;
+}
+span {
+    color: #800080;
+}
+body{
+    height: 100vh;
+    background-image: url("https://i.pinimg.com/originals/49/1b/8b/491b8bbbbdfb7518d96fd83aaf8789a4.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+form{
+    display: flex;
+    justify-content: center;
+}
+input {
+    padding: 10px; 
+    border-radius: 10px; /* Adjust this value for more/less rounding */
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+}
+
+.rAndPDiv{
+  padding-top: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+.rAndP {
+  flex: 1; /* Makes both components take equal width */
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #1d1160; /* Optional: Adds a background */
+  border-radius: 10px;
+  color: white;
+}
+
+.searchBar{
+  padding-top: 8%;;
+}

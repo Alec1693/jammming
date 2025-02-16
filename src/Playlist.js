@@ -13,7 +13,7 @@ function Playlist(props){
         props.updatePlaylistName(playlistName);
     }
     return (
-        <div>
+        <div className="sResultsAndPlaylist">
             <form onSubmit={handlePlaylistNaming}>
                 <input type="text" placeholder="Name your playlist here..." value={playlistName} onChange={(e) => setPlaylistName(e.target.value)}></input>
             </form>

@@ -3,7 +3,7 @@ import TrackList from "./TrackList"
 import React, { useState, useEffect } from "react";
 import Spotify from "./utils/Spotify";
 import Playlist from "./Playlist";
-import "./css/app.module.css"
+import "./app.css"
 
 function App() {
   //state stores results from search via spotify api
@@ -44,19 +44,19 @@ function App() {
     console.log("Playlist created");
     console.log(apiResponse);
   }
-  //test function Im using to print some data to console
-  const test = () => {
-  }
-  //3 react components needed for app: Searchbar, Results, Playlist
-  //1 Module to process API requests: Spotify
 
   return (
     <div>
       <h2>Ja<span>mmm</span>ing</h2>
-      <SearchBar sendSearch={spotifySearch} />
-      <TrackList addTrack={addTrackToPlaylist} searchResults={searchResults} />
-      <Playlist playlist={playlist} removeTrack={removeTrackFromPlaylist} updatePlaylistName={updatePlaylistName} />
-      <button onClick={test}>Click</button>
+      <SearchBar className="" sendSearch={spotifySearch} />
+      <div className="rAndPDiv">
+        <div className="rAndP">
+          <TrackList addTrack={addTrackToPlaylist} searchResults={searchResults} />
+        </div>
+        <div className="rAndP">
+          <Playlist playlist={playlist} removeTrack={removeTrackFromPlaylist} updatePlaylistName={updatePlaylistName} />
+        </div>
+      </div>
     </div>
   );
 }
