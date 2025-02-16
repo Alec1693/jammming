@@ -3,6 +3,7 @@
 const Spotify = {
   userParameters: {
     clientId: 'f556a45adae348b4ac0f486b536ea5b9',
+    userId: '12128830856',
     clientSecret: 'fe908bbe3f64418bb6a159ee0e0c321f',
     tokenUrl: 'https://accounts.spotify.com/api/token',
     redirectUri: 'http://localhost:3000',
@@ -39,20 +40,68 @@ const Spotify = {
         window.location.href = url;
       }
     },
-    search(accessToken, term){
-      const response = fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+    async search(accessToken, term){
+      try{
+        const response = await fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
-        }).then(response => response.json())
-        return response.tracks.items.map(track => ({
-              id: track.id,
-              name: track.name,
-              artist: track.artists[0].name,
-              album: track.album.name,
-              uri: track.uri,
-              albumCover: track.album.images[2].url
-        }))
+        })
+        const data = await response.json();
+        return data.tracks.items.map(track => ({
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          uri: track.uri,
+          albumCover: track.album.images[2].url
+    }))
+      }catch(e){
+        console.error("Error in Spotify Search function", e)
+      }
+    },
+    async createPlaylistWithTracks(accessToken, pName, tracks){
+      try{
+        const createPlaylistResponse = await fetch(`https://api.spotify.com/v1/users/${Spotify.userParameters.userId}/playlists`, {
+        method: 'POST',  
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: pName,
+            description: 'We made a playlist with Alecs React program',
+            public: true
+          })
+        })
+        const createPlaylistData = await createPlaylistResponse.json();
+        const playlistId = createPlaylistData.id;
+        await Spotify.addTracksToPlaylist(tracks, playlistId, accessToken);
+      }catch(e){
+        console.error("Error creating playlist", e)
+      }
+    },
+    async addTracksToPlaylist(tracks, id, accessToken){
+      const uriList = Spotify.createUriList(tracks);
+      try{
+        const addingTracksResponse = await fetch(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            uris: uriList
+          })
+        })
+        const createTrackData = await addingTracksResponse.json();
+      }catch(e){
+        console.error("Error adding tracks to playlist");
+      }
+    },
+    createUriList(trackList){
+      const trackUriList = trackList.map(track => track.uri)
+      return trackUriList;
     }
 }
 

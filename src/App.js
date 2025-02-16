@@ -20,8 +20,8 @@ function App() {
     setAccessToken(token);
   },)
   //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
-  const spotifySearch = (searchValue) => {
-    const apiSearchResults = Spotify.search(accessToken, searchValue);
+  async function spotifySearch(searchValue){
+    const apiSearchResults = await Spotify.search(accessToken, searchValue)
     setSearchResults(apiSearchResults)
   }
   //callback function to add an item to playlist state for playlist component
@@ -39,13 +39,12 @@ function App() {
   //callback to set the name of the playlist
   async function updatePlaylistName(name){
     //once this is called we will be creating the playlist and sending the playlist tracks to the api
-    const apiResponse = await Spotify.createSpotifyPlaylist();
+    const apiResponse = await Spotify.createPlaylistWithTracks(accessToken, name, playlist);
     console.log("Playlist created");
     console.log(apiResponse);
   }
   //test function Im using to print some data to console
-  const test = (t) => {
-    console.log(accessToken)
+  const test = () => {
   }
   //3 react components needed for app: Searchbar, Results, Playlist
   //1 Module to process API requests: Spotify
