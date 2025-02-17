@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./app.css"
 
 function Playlist(props){
     //state to hold the value of the playlistName
@@ -20,7 +21,7 @@ function Playlist(props){
             {props.playlist.length > 0 ? (
                 props.playlist.map(track => {
                     return (
-                        <div id={track.id} key={track.id}>
+                        <div className="tracks" id={track.id} key={track.id}>
                             <p>{track.name}</p>
                             <p>{track.album}</p>
                             <p>{track.artist}</p>

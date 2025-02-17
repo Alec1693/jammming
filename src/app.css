@@ -4,13 +4,8 @@
   box-sizing: border-box;
 }
 h2 {
-    width: 100%;  /* Makes the element span the full width */
-    display: block; /* Ensures it behaves like a block element */
-    text-align: center; /* Optional: Centers the text */
-    background-color: #1d1160; /* Optional: Adds a background */
     padding: 10px; /* Optional: Adds some spacing */
     color: white;
-    top: 0;
 }
 span {
     color: #800080;
@@ -38,9 +33,20 @@ p{
     display: flex;
     justify-content: center;
 }
+.jamHeading{
+  width: 100%;  /* Makes the element span the full width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Optional: Centers the text */
+  top: 0;
+  height: 5vh;
+  background-color: #1d1160; /* Optional: Adds a background */
+  align-items: center;
+}
 
 .rAndPDiv{
-  padding-top: 20%;
+  padding-top: 10%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -48,13 +54,24 @@ p{
 }
 .rAndP {
   flex: 1; /* Makes both components take equal width */
-  padding: 20px;
+  padding: 5px;
   border: 1px solid #ccc;
   background-color: #1d1160; /* Optional: Adds a background */
   border-radius: 10px;
   color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .searchBar{
-  padding-top: 8%;;
+  padding-top: 5%;;
+}
+
+.tracks{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 4px;
+  font-size: small;
 }

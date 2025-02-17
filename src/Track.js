@@ -1,4 +1,5 @@
 import React from "react";
+import "./app.css"
 
 function Track(props){
     const handleClick = (track) => {
@@ -9,7 +10,7 @@ function Track(props){
             {
                 props.searchResults.map(track => {
                     return (
-                        <div id={track.id} key={track.id}>
+                        <div className="tracks" id={track.id} key={track.id}>
                             <p>{track.name}</p>
                             <p>{track.album}</p>
                             <p>{track.artist}</p>

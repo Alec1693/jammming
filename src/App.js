@@ -47,7 +47,9 @@ function App() {
 
   return (
     <div>
-      <h2>Ja<span>mmm</span>ing</h2>
+      <div className="jamHeading">
+        <h2>Ja<span>mmm</span>ing</h2>
+      </div>
       <SearchBar className="" sendSearch={spotifySearch} />
       <div className="rAndPDiv">
         <div className="rAndP">
