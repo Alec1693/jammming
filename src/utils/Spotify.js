@@ -53,8 +53,7 @@ const Spotify = {
           name: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
-          uri: track.uri,
-          albumCover: track.album.images[2].url
+          uri: track.uri
     }))
       }catch(e){
         console.error("Error in Spotify Search function", e)

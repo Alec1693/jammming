@@ -12,10 +12,9 @@ function Track(props){
                     return (
                         <div className="tracks" id={track.id} key={track.id}>
                             <p>{track.name}</p>
-                            <p>{track.album}</p>
                             <p>{track.artist}</p>
-                            <img src={track.albumCover} alt="Album Cover"></img>
-                            <button onClick={() => handleClick(track)}>+</button>
+                            <p>{track.album}</p>
+                            <button className="trackBtn" onClick={() => handleClick(track)}>+</button>
                         </div>
                     )
                 })
