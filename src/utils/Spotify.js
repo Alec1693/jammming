@@ -98,15 +98,16 @@ const Spotify = {
         console.error("Error adding tracks to playlist");
       }
     },
-    async getUserData(accessToken){
+    async getUserData(){
       try{
-        const userData = await fetch(`https://api.spotify.com/v1/users/${Spotify.userParameters.userId}`, {
-          method: 'POST',
+        const userDataResponse = await fetch(`https://api.spotify.com/v1/users/${Spotify.userParameters.userId}`, {
+          method: 'GET',
           headers: {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${Spotify.accessToken}`
           }
         })
-        console.log(userData);
+        let userData = await userDataResponse.json();
+        return userData
       }catch(e){
         console.error('Error fetching user data', e);
       }

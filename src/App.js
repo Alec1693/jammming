@@ -19,8 +19,15 @@ function App() {
     //check if the accessToken state has been assigned the token from spotify api. if not then run the Spotify function fetchAccessToken and assign it to the accessToken state
     let token = Spotify.fetchAccessToken();
     setAccessToken(token);
-    let userInfo = Spotify.getUserData(token);
-    console.log(userInfo);
+    async function getData(){
+      try{
+        const response = await Spotify.getUserData(token);
+        console.log(response);
+      }catch(e){
+        console.error("Error fetching user data in useEffect", e)
+      }
+    }
+    getData();
   },)
   //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
   async function spotifySearch(searchValue){
