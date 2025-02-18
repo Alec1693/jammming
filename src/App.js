@@ -19,6 +19,8 @@ function App() {
     //check if the accessToken state has been assigned the token from spotify api. if not then run the Spotify function fetchAccessToken and assign it to the accessToken state
     let token = Spotify.fetchAccessToken();
     setAccessToken(token);
+    let userInfo = Spotify.getUserData(token);
+    console.log(userInfo);
   },)
   //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
   async function spotifySearch(searchValue){
@@ -52,10 +54,10 @@ function App() {
       </div>
       <SearchBar className="" sendSearch={spotifySearch} />
       <div className="rAndPDiv">
-        <div className="rAndP">
+        <div className="rAndP results">
           <TrackList addTrack={addTrackToPlaylist} searchResults={searchResults} />
         </div>
-        <div className="rAndP">
+        <div className="rAndP playlist">
           <Playlist playlist={playlist} removeTrack={removeTrackFromPlaylist} updatePlaylistName={updatePlaylistName} />
         </div>
       </div>

@@ -14,8 +14,9 @@ body{
     height: 100vh;
     background-image: url("https://i.pinimg.com/originals/49/1b/8b/491b8bbbbdfb7518d96fd83aaf8789a4.png");
     background-size: cover;
-    background-position: center;
+    background-position: center 5%;
     background-repeat: no-repeat;
+
 }
 form{
     display: flex;
@@ -46,7 +47,7 @@ p{
 }
 
 .rAndPDiv{
-  padding-top: 10%;
+  padding-top: 5%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -54,7 +55,7 @@ p{
 }
 .rAndP {
   flex: 1; /* Makes both components take equal width */
-  height: 60vh;
+  height: 45vh;
   width: 30%;
   padding: 5px;
   border: 1px solid #ccc;
@@ -62,6 +63,12 @@ p{
   border-radius: 10px;
   color: white;
   overflow: auto;
+}
+.results{
+  margin-left: 2%;
+}
+.playlist{
+  margin-right: 2%;
 }
 
 .searchBar{
@@ -80,6 +87,10 @@ p{
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.trackBtn{
-  right: 1px;
+.trackForm{
+  transform: scale(0.6);
+}
+
+.btn:last-child{
+  margin-top: auto;
 }

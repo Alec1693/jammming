@@ -14,7 +14,7 @@ function Track(props){
                             <p>{track.name}</p>
                             <p>{track.artist}</p>
                             <p>{track.album}</p>
-                            <button className="trackBtn" onClick={() => handleClick(track)}>+</button>
+                            <button className="btn:last-child" onClick={() => handleClick(track)}>+</button>
                         </div>
                     )
                 })

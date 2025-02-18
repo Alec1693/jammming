@@ -16,7 +16,7 @@ function Playlist(props){
     return (
         <div className="sResultsAndPlaylist">
             <form onSubmit={handlePlaylistNaming}>
-                <input type="text" placeholder="Name your playlist here..." value={playlistName} onChange={(e) => setPlaylistName(e.target.value)}></input>
+                <input className="trackForm" type="text" placeholder="Name your playlist here..." value={playlistName} onChange={(e) => setPlaylistName(e.target.value)}></input>
             </form>
             {props.playlist.length > 0 ? (
                 props.playlist.map(track => {
@@ -25,7 +25,7 @@ function Playlist(props){
                             <p>{track.name}</p>
                             <p>{track.artist}</p>
                             <p>{track.album}</p>
-                            <button trackBtn onClick={() => handleTrackClick(track)}>-</button>
+                            <button className="btn:last-child" onClick={() => handleTrackClick(track)}>-</button>
                         </div>
                     )
                 })

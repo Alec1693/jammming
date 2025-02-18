@@ -98,6 +98,19 @@ const Spotify = {
         console.error("Error adding tracks to playlist");
       }
     },
+    async getUserData(accessToken){
+      try{
+        const userData = await fetch(`https://api.spotify.com/v1/users/${Spotify.userParameters.userId}`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        })
+        console.log(userData);
+      }catch(e){
+        console.error('Error fetching user data', e);
+      }
+    },
     createUriList(trackList){
       const trackUriList = trackList.map(track => track.uri)
       return trackUriList;
