@@ -12,6 +12,8 @@ function App() {
   const [playlist, setPlaylist] = useState([]);
   //store the spotify authorization code to send playlist to api
   const [accessToken, setAccessToken] = useState('');
+  //store the name of the user we received the token from
+  const [username, setUsername] = useState('');
   //create a useEffect that runs only when the app component mounts. I want to use oauth2 to authorize access to users account with permission to create a new playlist
   //useEffect will also retrieve an access_token returned via url and store it in a variable to be used when sending api request to create a playlist and add songs to playlist
   //callback function to retrieve the search results from SearchBar
@@ -22,7 +24,7 @@ function App() {
     async function getData(){
       try{
         const response = await Spotify.getUserData(token);
-        console.log(response);
+        setUsername(response.display_name);
       }catch(e){
         console.error("Error fetching user data in useEffect", e)
       }
@@ -59,6 +61,7 @@ function App() {
       <div className="jamHeading">
         <h2>Ja<span>mmm</span>ing</h2>
       </div>
+      <h3>Hello, {username}</h3>
       <SearchBar className="" sendSearch={spotifySearch} />
       <div className="rAndPDiv">
         <div className="rAndP results">
