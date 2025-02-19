@@ -30,7 +30,7 @@ function App() {
       }
     }
     getData();
-  },)
+  },[])
   //create a function thats used as a callback to searchbar and calls the spotify search method using the value of item being searched from searchbar.js
   async function spotifySearch(searchValue){
     const apiSearchResults = await Spotify.search(accessToken, searchValue)

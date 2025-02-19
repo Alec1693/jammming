@@ -83,7 +83,7 @@ const Spotify = {
     async addTracksToPlaylist(tracks, id, accessToken){
       const uriList = Spotify.createUriList(tracks);
       try{
-        const addingTracksResponse = await fetch(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+        await fetch(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -93,7 +93,6 @@ const Spotify = {
             uris: uriList
           })
         })
-        const createTrackData = await addingTracksResponse.json();
       }catch(e){
         console.error("Error adding tracks to playlist");
       }
