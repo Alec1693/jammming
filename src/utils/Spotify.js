@@ -6,7 +6,7 @@ const Spotify = {
     userId: '12128830856',
     clientSecret: 'fe908bbe3f64418bb6a159ee0e0c321f',
     tokenUrl: 'https://accounts.spotify.com/api/token',
-    redirectUri: 'http://localhost:3000',
+    redirectUri: 'https://magenta-llama-22da0d.netlify.app/',
     scope: 'playlist-modify-public',
     authUrl: "https://accounts.spotify.com/authorize"
   },
