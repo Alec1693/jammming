@@ -45,7 +45,16 @@ p{
   background-color: #1d1160; /* Optional: Adds a background */
   align-items: center;
 }
-
+.userHeading{
+  width: 100%;  /* Makes the element span the full width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Optional: Centers the text */
+  height: 5vh;
+  color: white;
+  align-items: center;
+}
 .rAndPDiv{
   padding-top: 5%;
   display: flex;

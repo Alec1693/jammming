@@ -61,7 +61,9 @@ function App() {
       <div className="jamHeading">
         <h2>Ja<span>mmm</span>ing</h2>
       </div>
-      <h3>Hello, {username}</h3>
+      <div className="userHeading">
+        <h3>Hello, {username}</h3>
+      </div>
       <SearchBar className="" sendSearch={spotifySearch} />
       <div className="rAndPDiv">
         <div className="rAndP results">
